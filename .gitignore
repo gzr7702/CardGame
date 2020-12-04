@@ -3,3 +3,5 @@
 spec.pdf
 
 .coverage
+
+__pycache__

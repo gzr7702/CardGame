@@ -4,15 +4,18 @@
 
 import unittest
 
+from card import Card
+
 class TestGameSetup(unittest.TestCase):
     ''' Test the game setup including the deck '''
     def setUp(self):
         ''' Create a card deck and two players '''
-        self.deck = []
+        self.sample_card = Card('clubs', '3')
 
-    def test_deck_proper_length(self):
-        ''' Is the deck the proper length? '''
-        self.assertTrue(len(self.deck) == 52)
+    def test_card_created_with_properties(self):
+        ''' Test card is created properly '''
+        self.assertTrue(self.sample_card.suit == 'clubs')
+        self.assertTrue(self.sample_card.value == '3')
 
 class TestGame(unittest.TestCase):
     ''' Test that the game can be played properly '''
