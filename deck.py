@@ -27,11 +27,3 @@ class Deck:
     def cards(self):
         """ Return raw list of cards """
         return self._cards
-
-    def __str__(self):
-        """ Return string representation of cards """
-        card_string = ""
-        for card in self._cards:
-            card_string = " " + card_string + " " + card
-
-        return card_string
