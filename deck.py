@@ -2,10 +2,6 @@
 
 from card import Card
 
-suits = ["clubs", "hearts", "diamonds", "spades"]
-values = [str(i) for i in range(1, 11)]
-values.extend(["Jack", "King", "Queen", "Ace"])
-
 
 class Deck:
     """ The deck class """
@@ -13,8 +9,14 @@ class Deck:
     def __init__(self):
         self._count = 52
 
-        card = Card("spades", "ace")
-        self._cards = [card] * self._count
+        suits = ["Clubs", "Hearts", "Diamonds", "Spades"]
+        values = [str(i) for i in range(2, 11)]
+        values.extend(["Jack", "King", "Queen", "Ace"])
+
+        self._cards = []
+        for suit in suits:
+            for value in values:
+                self._cards.append(Card(suit, value))
 
     @property
     def count(self):
@@ -23,5 +25,13 @@ class Deck:
 
     @property
     def cards(self):
-        """ Return list of cards """
+        """ Return raw list of cards """
         return self._cards
+
+    def __str__(self):
+        """ Return string representation of cards """
+        card_string = ""
+        for card in self._cards:
+            card_string = " " + card_string + " " + card
+
+        return card_string

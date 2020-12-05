@@ -28,7 +28,7 @@ class TestGameSetup(unittest.TestCase):
 
     def test_deck_has_all_suits(self):
         """ Check deck suits """
-        suit_count = {"clubs": 0, "hearts": 0, "diamonds": 0, "spades": 0}
+        suit_count = {"Clubs": 0, "Hearts": 0, "Diamonds": 0, "Spades": 0}
 
         # count cards in all suits
         for card in self.deck.cards:

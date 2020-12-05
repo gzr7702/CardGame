@@ -17,3 +17,6 @@ class Card:
     def value(self):
         """ get value """
         return self._value
+
+    def __str__(self):
+        return str(self._value) + " of " + str(self._suit)
