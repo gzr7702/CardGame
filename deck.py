@@ -1,5 +1,6 @@
 """ Deck module """
 
+import random
 from card import Card
 
 
@@ -27,3 +28,14 @@ class Deck:
     def cards(self):
         """ Return raw list of cards """
         return self._cards
+
+    def shuffle(self):
+        """ Shuffle the deck in place """
+        random.shuffle(self._cards)
+
+    def __repr__(self):
+        deck_list = []
+        for card in self._cards:
+            deck_list.append(str(card))
+
+        return ",".join(deck_list)

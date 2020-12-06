@@ -23,7 +23,7 @@ class TestGameSetup(unittest.TestCase):
         )
 
     def test_card_str_method(self):
-        ''' Test card.__str__ exists and has the proper text '''
+        """ Test card.__str__ exists and has the proper text """
         card_str = "3 of Clubs"
         self.assertTrue(str(self.sample_card), card_str)
 
@@ -42,6 +42,16 @@ class TestGameSetup(unittest.TestCase):
         # assert that each suit has all cards
         for card_count in suit_count.values():
             self.assertEqual(card_count, 13)
+
+    def test_deck_has_been_shuffled(self):
+        """Create a list of indeces for the ordered deck, then do the
+        same for the shuffled deck and assert that they are different"""
+
+        unshuffled_deck = repr(self.deck)
+        self.deck.shuffle()
+        shuffled_deck = repr(self.deck)
+
+        self.assertFalse(unshuffled_deck == shuffled_deck)
 
 
 class TestGame(unittest.TestCase):
