@@ -22,6 +22,11 @@ class TestGameSetup(unittest.TestCase):
             (self.sample_card.suit == "clubs") and (self.sample_card.value == "3")
         )
 
+    def test_card_str_method(self):
+        ''' Test card.__str__ exists and has the proper text '''
+        card_str = "3 of Clubs"
+        self.assertTrue(str(self.sample_card), card_str)
+
     def test_deck_is_proper_length(self):
         """ Test deck length """
         self.assertTrue(self.deck.count == 52)
