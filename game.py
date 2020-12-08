@@ -31,13 +31,14 @@ def main():
     )
     print(instructions)
 
-    command = ""
     for i in range(6):
         command = get_command()
         print(command)
         if command == "q":
             print("Ending play...")
             sys.exit(1)
+
+        
 
 
 if __name__ == "__main__":

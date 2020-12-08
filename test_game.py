@@ -66,6 +66,11 @@ class TestGameSetup(unittest.TestCase):
 class TestGame(unittest.TestCase):
     """Test that the game can be played properly"""
 
+    def setUp(self):
+        """ Create a card deck. """
+
+        self.deck = Deck()
+
     @patch("sys.stdout", new_callable=StringIO)
     def test_game_text(self, mock_stdout):
         """ Test that the game text is correct. """
@@ -75,6 +80,7 @@ class TestGame(unittest.TestCase):
         )
         instructions = 6 * "Hit any key to continue\n"
         text = intro + instructions
+        # TODO: figure out all inputs
         game.main()
         self.assertEqual(mock_stdout.getvalue(), text)
 
@@ -83,6 +89,14 @@ class TestGame(unittest.TestCase):
         """ Test that the player input works. """
         command = game.get_command()
         self.assertEqual(command, "q")
+
+    def test_get_next_card(self):
+        """ Test that we can pull the next card on the deck. """
+
+        card = self.deck.get_next_card()
+        card_count = self.deck.count
+        self.assertIsInstance(card, Card)
+        self.assertTrue(card_count, 51)
 
 
 if __name__ == "__main__":
