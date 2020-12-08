@@ -8,6 +8,7 @@ from io import StringIO
 
 from card import Card
 from deck import Deck
+from player import Player
 import game
 
 
@@ -62,9 +63,13 @@ class TestGameSetup(unittest.TestCase):
 
         self.assertFalse(unshuffled_deck == shuffled_deck)
 
+    def test_player_has_a_name(self):
+        p = Player()
+        self.assertIsNotNone(p.name)
+
 
 class TestGame(unittest.TestCase):
-    """Test that the game can be played properly"""
+    """Test the aspects of the game """
 
     def setUp(self):
         """ Create a card deck. """
