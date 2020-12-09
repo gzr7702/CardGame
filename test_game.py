@@ -64,8 +64,9 @@ class TestGameSetup(unittest.TestCase):
         self.assertFalse(unshuffled_deck == shuffled_deck)
 
     def test_player_has_a_name(self):
-        p = Player()
-        self.assertIsNotNone(p.name)
+        """ Test we can create a player and he has a name. """
+        player = Player()
+        self.assertIsNotNone(player.name)
 
 
 class TestGame(unittest.TestCase):
@@ -74,7 +75,9 @@ class TestGame(unittest.TestCase):
     def setUp(self):
         """ Create a card deck. """
 
+        self.sample_card = Card("Hearts", "7")
         self.deck = Deck()
+        self.player = Player()
 
     @patch("sys.stdout", new_callable=StringIO)
     def test_game_text(self, mock_stdout):
@@ -102,6 +105,20 @@ class TestGame(unittest.TestCase):
         card_count = self.deck.count
         self.assertIsInstance(card, Card)
         self.assertTrue(card_count, 51)
+
+    def test_add_card_to_player_hand(self):
+        """ Test that we can add a card to a player's hand. """
+
+        self.player.hand.append(self.sample_card)
+        self.assertEqual(self.player.hand, [self.sample_card])
+
+    def test_player_sort_method(self):
+        card1 = Card("Spades", "2")
+        card2 = Card("Diamonds", "5")
+        card3 = Card("Spades", "King")
+        card4 = Card("Hearts", "3")
+        card5 = Card("Clubs", "Ace")
+        #TODO: add cards to hand, assert
 
 
 if __name__ == "__main__":

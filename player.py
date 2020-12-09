@@ -14,9 +14,18 @@ class Player:
 
     @property
     def name(self):
+        """ Return the player's name """
         return self._name
+
+    def sort(self):
+        pass
 
     @property
     def hand(self):
-        # TODO Add sort
+        """ Return the player's hand """
         return self._hand
+
+    @hand.setter
+    def hand(self, card):
+        """ Add a card to the player's hand """
+        self._hand.append(card)
