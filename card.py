@@ -20,3 +20,6 @@ class Card:
 
     def __str__(self):
         return str(self._value) + " of " + str(self._suit)
+
+    def __repr__(self):
+        return str(self._value) + " " + str(self._suit)

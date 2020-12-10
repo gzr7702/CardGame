@@ -7,3 +7,5 @@ spec.pdf
 .coverage
 
 __pycache__
+
+*.pyc
