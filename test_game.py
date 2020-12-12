@@ -50,7 +50,8 @@ class TestGame(unittest.TestCase):
         self.assertIsInstance(card, Card)
         self.assertTrue(card_count, 51)
 
-    def test_player_sort_method(self):
+    def test_add_card_to_hand(self):
+        """ Test that we can add a card to a player's hand. """
 
         unsorted_cards = [
             Card("Spades", "2"),
@@ -60,17 +61,8 @@ class TestGame(unittest.TestCase):
             Card("Clubs", "Ace"),
         ]
 
-        sorted_cards = self.hand.sort(unsorted_cards)
-        import pdb; pdb.set_trace()
-        self.assertNotEqual(unsorted_cards, sorted_cards)
-
-    '''
-    def test_add_card_to_hand(self):
-        """ Test that we can add a card to a player's hand. """
-
         self.hand.cards.append(self.sample_card)
         self.assertEqual(self.hand, [self.sample_card])
-    '''
 
 if __name__ == "__main__":
     unittest.main()
