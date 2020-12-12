@@ -22,4 +22,4 @@ class Card:
         return str(self._value) + " of " + str(self._suit)
 
     def __repr__(self):
-        return str(self._value) + " " + str(self._suit)
+        return str(self._value) + ":" + str(self._suit)

@@ -7,10 +7,9 @@ class Hand:
     def __init__(self):
         self._cards = []
 
-    def sort(self, hand):
+    def sort(self):
         """ Sort the cards in a hand """
         print("in sort")
-        return hand
 
     @property
     def cards(self):
@@ -21,11 +20,11 @@ class Hand:
     def cards(self, card):
         """ Add a card to the player's hand """
         self._cards.append(card)
-        # self.sort()
+        self.sort()
 
     def __repr__(self):
         hand_list = []
         for card in self._cards:
-            hand_list.append(str(card))
+            hand_list.append(repr(card))
 
-        return ",".join(hand_list)
+        return ", ".join(hand_list)

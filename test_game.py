@@ -53,16 +53,30 @@ class TestGame(unittest.TestCase):
     def test_add_card_to_hand(self):
         """ Test that we can add a card to a player's hand. """
 
-        unsorted_cards = [
-            Card("Spades", "2"),
-            Card("Diamonds", "5"),
-            Card("Spades", "King"),
-            Card("Hearts", "3"),
-            Card("Clubs", "Ace"),
+        self.hand.cards.append(self.sample_card)
+        self.assertEqual(repr(self.hand), repr(self.sample_card))
+
+    def test_add_multiple_cards_to_hand(self):
+        """Test that we can add multiple cards to a player's hand
+        and that they are sorted.
+        """
+
+        cards = [
+            ("Spades", "2"),
+            ("Diamonds", "5"),
+            ("Spades", "King"),
+            ("Hearts", "3"),
+            ("Clubs", "Ace"),
         ]
 
-        self.hand.cards.append(self.sample_card)
-        self.assertEqual(self.hand, [self.sample_card])
+        unsorted_cards = ', '.join([x[1]+ ':' + x[0] for x in cards])
+        print(unsorted_cards)
+
+        for card in cards:
+            self.hand.cards.append(Card(card[0], card[1]))
+
+        self.assertNotEqual(str(self.hand), unsorted_cards)
+
 
 if __name__ == "__main__":
     unittest.main()
