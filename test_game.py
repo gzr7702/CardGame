@@ -69,13 +69,13 @@ class TestGame(unittest.TestCase):
             ("Clubs", "Ace"),
         ]
 
-        unsorted_cards = ', '.join([x[1]+ ':' + x[0] for x in cards])
-        print(unsorted_cards)
+        unsorted_cards = ", ".join([x[1] + ":" + x[0] for x in cards])
 
         for card in cards:
-            self.hand.cards.append(Card(card[0], card[1]))
+            self.hand.add_card(Card(card[0], card[1]))
 
-        self.assertNotEqual(str(self.hand), unsorted_cards)
+        print(self.hand.cards)
+        #self.assertNotEqual(str(self.hand), unsorted_cards)
 
 
 if __name__ == "__main__":

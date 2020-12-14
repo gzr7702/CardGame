@@ -9,15 +9,19 @@ class Hand:
 
     def sort(self):
         """ Sort the cards in a hand """
-        print("in sort")
+        face_points =  {'Ace': 1, 'Jack': 11, 'King': 12, 'Queen': 13}
+
+        card_dict = {'Spades': [], 'Diamonds': [], 'Hearts': [], 'Clubs': []}
+        for card in self._cards:
+            card_dict[card.suit].append(card.value)
+        print(card_dict)
 
     @property
     def cards(self):
         """ Return raw list of cards """
         return self._cards
 
-    @cards.setter
-    def cards(self, card):
+    def add_card(self, card):
         """ Add a card to the player's hand """
         self._cards.append(card)
         self.sort()
