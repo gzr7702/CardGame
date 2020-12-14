@@ -1,16 +1,11 @@
-""" These are the tests for card game. One integrated test for the game
-    setup, and one for the game play.
+""" These are the tests for card game setup.
 """
 
 import unittest
-from unittest.mock import patch
-from io import StringIO
 
 from card import Card
 from deck import Deck
-from hand import Hand
 from player import Player
-import game
 
 
 class TestGameSetup(unittest.TestCase):
@@ -19,15 +14,32 @@ class TestGameSetup(unittest.TestCase):
     def setUp(self):
         """ Create a card deck and two players """
 
-        self.sample_card = Card("clubs", "3")
+        self.sample_card = Card("Clubs", "3")
+        self.sample_face_card = Card("Diamonds", "King")
         self.deck = Deck()
 
     def test_card_created_with_properties(self):
         """ Test card is created properly """
 
         self.assertTrue(
-            (self.sample_card.suit == "clubs") and (self.sample_card.value == "3")
+            (self.sample_card.suit == "Clubs") and (self.sample_card.value == "3")
         )
+
+    def test_card_has_proper_suit_points(self):
+        """ Test that a number card has proper suit points. """
+        self.assertTrue(self.sample_card.suit_points, 4)
+
+    def test_card_has_proper_value_points(self):
+        """ Test that a number card has proper value points. """
+        self.assertTrue(self.sample_card.value_points, 3)
+
+    def test_face_card_has_proper_suit_points(self):
+        """ Test that a face card has proper suit points. """
+        self.assertTrue(self.sample_face_card.suit_points, 2)
+
+    def test_face_card_has_proper_value_points(self):
+        """ Test that a face card has proper value points. """
+        self.assertTrue(self.sample_face_card.value_points, 14)
 
     def test_card_str_method(self):
         """ Test card.__str__ exists and has the proper text """

@@ -74,8 +74,7 @@ class TestGame(unittest.TestCase):
         for card in cards:
             self.hand.add_card(Card(card[0], card[1]))
 
-        print(self.hand.cards)
-        #self.assertNotEqual(str(self.hand), unsorted_cards)
+        self.assertNotEqual(str(self.hand), unsorted_cards)
 
 
 if __name__ == "__main__":

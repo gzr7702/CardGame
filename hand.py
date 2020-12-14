@@ -8,13 +8,10 @@ class Hand:
         self._cards = []
 
     def sort(self):
-        """ Sort the cards in a hand """
-        face_points =  {'Ace': 1, 'Jack': 11, 'King': 12, 'Queen': 13}
+        """Sort the cards in a hand.
+        Cards are sorted first by suit, then by value."""
 
-        card_dict = {'Spades': [], 'Diamonds': [], 'Hearts': [], 'Clubs': []}
-        for card in self._cards:
-            card_dict[card.suit].append(card.value)
-        print(card_dict)
+        self._cards = sorted(self._cards, key=lambda c: (c.suit_points, c.value_points))
 
     @property
     def cards(self):
