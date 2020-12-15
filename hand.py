@@ -6,6 +6,7 @@ class Hand:
 
     def __init__(self):
         self._cards = []
+        self._points = 0
 
     def sort(self):
         """Sort the cards in a hand.
@@ -18,9 +19,15 @@ class Hand:
         """ Return raw list of cards """
         return self._cards
 
+    @property
+    def points(self):
+        """ Return list of total points. """
+        return self._points
+
     def add_card(self, card):
         """ Add a card to the player's hand """
         self._cards.append(card)
+        self._points += card.suit_points * card.value_points
         self.sort()
 
     def __repr__(self):
