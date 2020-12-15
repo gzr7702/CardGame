@@ -10,79 +10,6 @@ from player import Player
 import game
 
 
-class TestGame(unittest.TestCase):
-    """Test the aspects of the game """
-
-    def setUp(self):
-        """ Create a card deck. """
-
-        self.sample_card = Card("Hearts", "7")
-        self.deck = Deck()
-        self.player = Player()
-        self.hand = Hand()
-
-        cards = [
-            ("Spades", "2"),
-            ("Diamonds", "5"),
-            ("Spades", "King"),
-            ("Hearts", "3"),
-            ("Clubs", "Ace"),
-        ]
-
-        self.unsorted_cards = ", ".join([x[1] + ":" + x[0] for x in cards])
-
-        for card in cards:
-            self.hand.add_card(Card(card[0], card[1]))
-
-    '''
-    @patch("sys.stdout", new_callable=StringIO)
-    def test_game_text(self, mock_stdout):
-        """ Test that the game text is correct. """
-        intro = (
-            "Welecome! Hit any key for the next "
-            + "player to take a turn, 'q' to quit.\n"
-        )
-        instructions = 6 * "Hit any key to continue\n"
-        text = intro + instructions
-        # TODO: figure out all inputs
-        game.main()
-        self.assertEqual(mock_stdout.getvalue(), text)
-    '''
-
-    @patch("builtins.input", return_value="q")
-    def test_player_input(self, input):
-        """ Test that the player input works. """
-        command = game.get_command()
-        self.assertEqual(command, "q")
-
-    def test_get_next_card(self):
-        """ Test that we can pull the next card on the deck. """
-
-        card = self.deck.get_next_card()
-        card_count = self.deck.count
-        self.assertIsInstance(card, Card)
-        self.assertTrue(card_count, 51)
-
-    def test_add_card_to_hand(self):
-        """ Test that we can add a card to a player's hand. """
-
-        hand = Hand()
-        hand.add_card(self.sample_card)
-        self.assertEqual(repr(hand), repr(self.sample_card))
-
-    def test_cards_added_to_hand_are_sorted(self):
-        """Test that cards were added to hand in order. """
-
-        self.assertNotEqual(str(self.hand), self.unsorted_cards)
-
-    def test_that_hand_has_correct_points(self):
-        """Test that the hand object calculated the correct amount of points
-        when it added new cards to the hand.
-        """
-
-        self.assertEqual(self.hand.points, 37)
-
-
 class TestGameSetup(unittest.TestCase):
     """ Test the game setup including the deck """
 
@@ -155,6 +82,79 @@ class TestGameSetup(unittest.TestCase):
         """ Test we can create a player and he has a name. """
         player = Player()
         self.assertIsNotNone(player.name)
+
+
+class TestGame(unittest.TestCase):
+    """Test the aspects of the game """
+
+    def setUp(self):
+        """ Create a card deck. """
+
+        self.sample_card = Card("Hearts", "7")
+        self.deck = Deck()
+        self.player = Player()
+        self.hand = Hand()
+
+        cards = [
+            ("Spades", "2"),
+            ("Diamonds", "5"),
+            ("Spades", "King"),
+            ("Hearts", "3"),
+            ("Clubs", "Ace"),
+        ]
+
+        self.unsorted_cards = ", ".join([x[1] + ":" + x[0] for x in cards])
+
+        for card in cards:
+            self.hand.add_card(Card(card[0], card[1]))
+
+    '''
+    @patch("sys.stdout", new_callable=StringIO)
+    def test_game_text(self, mock_stdout):
+        """ Test that the game text is correct. """
+        intro = (
+            "Welecome! Hit any key for the next "
+            + "player to take a turn, 'q' to quit.\n"
+        )
+        instructions = 6 * "Hit any key to continue\n"
+        text = intro + instructions
+        # TODO: figure out all inputs
+        game.main()
+        self.assertEqual(mock_stdout.getvalue(), text)
+    '''
+
+    @patch("builtins.input", return_value="q")
+    def test_player_input(self, input):
+        """ Test that the player input works. """
+        command = game.get_command()
+        self.assertEqual(command, "q")
+
+    def test_get_next_card(self):
+        """ Test that we can pull the next card on the deck. """
+
+        card = self.deck.get_next_card()
+        card_count = self.deck.count
+        self.assertIsInstance(card, Card)
+        self.assertTrue(card_count, 51)
+
+    def test_add_card_to_hand(self):
+        """ Test that we can add a card to a player's hand. """
+
+        hand = Hand()
+        hand.add_card(self.sample_card)
+        self.assertEqual(repr(hand), repr(self.sample_card))
+
+    def test_cards_added_to_hand_are_sorted(self):
+        """Test that cards were added to hand in order. """
+
+        self.assertNotEqual(str(self.hand), self.unsorted_cards)
+
+    def test_that_hand_has_correct_points(self):
+        """Test that the hand object calculated the correct amount of points
+        when it added new cards to the hand.
+        """
+
+        self.assertEqual(self.hand.points, 37)
 
 
 if __name__ == "__main__":
