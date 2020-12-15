@@ -130,12 +130,22 @@ class TestGame(unittest.TestCase):
         self.assertEqual(command, "q")
 
     def test_get_next_card(self):
-        """ Test that we can pull the next card on the deck. """
+        """ Test that we can pull a card from the top of the deck. """
 
         card = self.deck.get_next_card()
         card_count = self.deck.count
         self.assertIsInstance(card, Card)
         self.assertTrue(card_count, 51)
+
+    def test_empty_deck_returns_nothing(self):
+        """ Create an empty deck to test that pulling a card will throw exception """
+
+        deck = Deck()
+        for i in range(52):
+            deck.get_next_card()
+        print(deck.count)
+
+        self.assertRaises(IndexError, deck.get_next_card)
 
     def test_add_card_to_hand(self):
         """ Test that we can add a card to a player's hand. """

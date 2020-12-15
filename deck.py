@@ -35,8 +35,12 @@ class Deck:
 
     def get_next_card(self):
         """ Get the next card off the top of the deck """
-        self._count -= 1
-        return self._cards.pop()
+
+        if self._count != 0:
+            self._count -= 1
+            return self._cards.pop()
+
+        raise IndexError
 
     def __repr__(self):
         deck_list = []
