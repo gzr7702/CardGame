@@ -4,14 +4,11 @@ import random
 
 from hand import Hand
 
-names = ["Millicent", "Ciot", "Bilbo", "Lana", "Lonnie", "Bennie", "Ezekial"]
-
-
 class Player:
     """ Player object """
 
-    def __init__(self):
-        self._name = random.choice(names)
+    def __init__(self, name):
+        self._name = name
         self._hand = Hand()
 
     @property

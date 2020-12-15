@@ -9,12 +9,75 @@ python game.py
 """
 
 import sys
+from player import Player
+from deck import Deck
 
 
-def get_command():
-    """ Wrapper for input() """
+def set_up():
+    """ Set up the game with two players and print instructions. """
 
-    return input("Hit any key to continue")
+    name1 = input("Player 1, please enter your name:").strip()
+    player1 = Player(name1)
+    name2 = input("Player 2, please enter your name:").strip()
+    player2 = Player(name2)
+
+    instructions = (
+        "\nWelecome, "
+        + player1.name
+        + " and "
+        + player2.name
+        + "! When it's your turn, hit any key to take a turn. Hit 'q' to quit.\n"
+    )
+    print(instructions)
+
+    return (player1, player2)
+
+
+def print_current_score(player1, player2):
+    """ Gets the current score for both users and prints them to the screen. """
+
+    score_message = (
+        "\tCurrent score for each player is:\n\t"
+        + player1.name
+        + ":"
+        + str(player1.hand.points)
+        + "\n\t"
+        + player2.name
+        + ":"
+        + str(player2.hand.points)
+        + "\n"
+    )
+
+    print(score_message)
+
+
+def end_game(player1, player2):
+    """ Complete the game by calculating the final score and printing the winner info. """
+
+    final_score_message = (
+        "\tThe final score is:\n\t"
+        + player1.name
+        + ":"
+        + str(player1.hand.points)
+        + "\n\t"
+        + player2.name
+        + ":"
+        + str(player2.hand.points)
+        + "\n"
+    )
+
+    print(final_score_message)
+
+    if player1.hand.points > player2.hand.points:
+        winner = player1
+    else:
+        winner = player2
+
+    winner_message = (
+        "The winner is " + winner.name + " With " + str(winner.hand.points) + " points!\n"
+    )
+
+    print(winner_message)
 
 
 def main():
@@ -26,17 +89,42 @@ def main():
 
     """
 
-    instructions = (
-        "Welecome! Hit any key for the next player " + "to take a turn, 'q' to quit."
-    )
-    print(instructions)
+    deck = Deck()
+    (player1, player2) = set_up()
 
-    for i in range(6):
-        command = get_command()
-        print(command)
-        if command == "q":
+    # Numbers of turns per player times number of players
+    full_num_turns = 3 * 2
+
+    # Begin the main game loop.
+    for i in range(full_num_turns):
+
+        active_player = None
+
+        if (i == 0) or (i % 2 == 0):
+            active_player = player1
+        else:
+            active_player = player2
+
+        print_current_score(player1, player2)
+
+        print("Your turn, " + active_player.name + "!\n")
+
+        command = input()
+
+        if command in ("q", "Q"):
             print("Ending play...")
-            sys.exit(1)
+            sys.exit(0)
+
+        next_card = deck.get_next_card()
+        next_card_message = (
+            active_player.name + " drew the " + str(next_card) + "! "
+            + "That's worth " + str(next_card.suit_points * next_card.value_points) + "!\n"
+        )
+        print(next_card_message)
+
+        active_player.hand.add_card(next_card)
+
+    end_game(player1, player2)
 
 
 if __name__ == "__main__":
