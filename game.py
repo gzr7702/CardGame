@@ -12,6 +12,7 @@ import sys
 from player import Player
 from deck import Deck
 
+# TODO: finish comments
 
 def set_up():
     """ Set up the game with two players and print instructions. """
@@ -51,12 +52,19 @@ def print_current_score(player1, player2):
     print(score_message)
 
 
-def game_score(player1, player2):
-    """ Returns the user the winner based on points. """
+def calculate_winner(player1, player2):
+    """ Returns the user the winner based on points.
+
+    If there is a tie, return None.
+    """
 
     if player1.hand.points > player2.hand.points:
         return player1
-    return player2
+
+    if player1.hand.points < player2.hand.points:
+        return player2
+
+    return None
 
 
 def player_takes_turn(active_player, deck):
@@ -95,15 +103,22 @@ def end_game(player1, player2):
 
     print(final_score_message)
 
-    winner = game_score(player1, player2)
+    winner = calculate_winner(player1, player2)
 
-    winner_message = (
-        "The winner is "
-        + winner.name
-        + " With "
-        + str(winner.hand.points)
-        + " points!\n"
-    )
+    if winner:
+        winner_message = (
+            "The winner is "
+            + winner.name
+            + " With "
+            + str(winner.hand.points)
+            + " points!\n"
+        )
+    else:
+        winner_message = (
+            "We have a tie with "
+            + str(player1.hand.points)
+            + "!"
+        )
 
     print(winner_message)
 

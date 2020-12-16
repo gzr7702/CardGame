@@ -197,7 +197,29 @@ class TestGame(unittest.TestCase):
 
         self.assertEqual(repr(next_card), repr(player.hand))
 
-    # TODO: test game_score()
+    def test_calculate_winner_function(self):
+        """ Test that the game score function returns the winner."""
+
+        winning_player = Player("Winner")
+        winning_card = Card("Clubs", "Queen")
+        winning_player.hand.add_card(winning_card)
+
+        losing_player = Player("Loser")
+        losing_card = Card("Spades", "2")
+        losing_player.hand.add_card(losing_card)
+
+        winner = game.calculate_winner(winning_player, losing_player)
+        self.assertIs(winning_player, winner)
+
+    def test_calculate_winner_returns_tie(self):
+        """ Test that the game score function returns the winner."""
+
+        player = Player("Winner")
+        card = Card("Clubs", "Queen")
+        player.hand.add_card(card)
+
+        winner = game.calculate_winner(player, player)
+        self.assertIsNone(winner)
 
     @patch("sys.stdout", new_callable=StringIO)
     def test_end_game_function(self, mock_stdout):
