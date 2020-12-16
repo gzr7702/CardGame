@@ -1,12 +1,22 @@
-""" The module that holds the player object """
+""" This module holds the player object.
 
-import random
+    Typical usage:
+
+    player = player
+"""
 
 from hand import Hand
 
 
 class Player:
-    """ Player object """
+    """Player object.
+
+    This clases holds the player object. The name is passed in as a parameter.
+
+    Attributes:
+        name: The name of the player.
+        hand: The hand that belongs to the player.
+    """
 
     def __init__(self, name):
         self._name = name

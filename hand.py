@@ -1,8 +1,22 @@
-""" The hand object """
+""" This is the hand module. It holds the card class.
+
+    Typcial usage:
+
+    hand = Hand()
+    hand.add_card(new_card)
+"""
 
 
 class Hand:
-    """ Hand class """
+    """The Hand class.
+
+    This is the class that creates a hand for a player to keep
+    their collection of cards.
+
+    Attributes:
+        cards: a list of cards.
+        points: the total number of points in the hand.
+    """
 
     def __init__(self):
         self._cards = []
@@ -10,13 +24,15 @@ class Hand:
 
     def sort(self):
         """Sort the cards in a hand.
-        Cards are sorted first by suit, then by value."""
+
+        Cards are sorted first by suit, then by value.
+        """
 
         self._cards = sorted(self._cards, key=lambda c: (c.suit_points, c.value_points))
 
     @property
     def cards(self):
-        """ Return raw list of cards """
+        """ Return raw list of cards. """
         return self._cards
 
     @property
@@ -25,7 +41,10 @@ class Hand:
         return self._points
 
     def add_card(self, card):
-        """ Add a card to the player's hand """
+        """Add a card to the player's hand .
+
+        As a card is added, it's points are evaluated.
+        """
         self._cards.append(card)
         self._points += card.suit_points * card.value_points
         self.sort()

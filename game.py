@@ -50,11 +50,33 @@ def print_current_score(player1, player2):
 
     print(score_message)
 
+
 def game_score(player1, player2):
+    """ Returns the user the winner based on points. """
+
     if player1.hand.points > player2.hand.points:
         return player1
-    else:
-        return player2
+    return player2
+
+
+def player_takes_turn(active_player, deck):
+    """ Player gets a card from the deck and their score is displayed """
+
+    next_card = deck.get_next_card()
+    next_card_message = (
+        active_player.name
+        + " drew the "
+        + str(next_card)
+        + "! "
+        + "That's worth "
+        + str(next_card.suit_points * next_card.value_points)
+        + "!\n"
+    )
+
+    print(next_card_message)
+
+    active_player.hand.add_card(next_card)
+
 
 def end_game(player1, player2):
     """ Complete the game by calculating the final score and printing the winner info. """
@@ -96,6 +118,8 @@ def main():
     """
 
     deck = Deck()
+    deck.shuffle()
+
     (player1, player2) = set_up()
 
     # Numbers of turns per player times number of players
@@ -121,19 +145,7 @@ def main():
             print("Ending play...")
             sys.exit(0)
 
-        next_card = deck.get_next_card()
-        next_card_message = (
-            active_player.name
-            + " drew the "
-            + str(next_card)
-            + "! "
-            + "That's worth "
-            + str(next_card.suit_points * next_card.value_points)
-            + "!\n"
-        )
-        print(next_card_message)
-
-        active_player.hand.add_card(next_card)
+        player_takes_turn(active_player, deck)
 
     end_game(player1, player2)
 

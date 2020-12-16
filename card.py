@@ -1,13 +1,25 @@
-""" This is the card module.
+""" This is the card module. It holds the card class.
 
-For each card, we hold the suit and value, as well as the points for each.
+    Typical usage:
+
+    card = Card()
 """
 
 
 class Card:
-    """ The card class """
+    """The card class.
+
+    This is the class that holds the card object.
+
+    Attributes:
+        suit: The card suit.
+        value: The card value.
+        suit_points: The points that the suit is worth.
+        value_points: The points that the value of the card is worth.
+    """
 
     def __init__(self, suit, value):
+
         # Maps that hold the integer values of face cards and suits
         face_points_map = {"Ace": 1, "Jack": 11, "King": 12, "Queen": 13}
         suit_points_map = {"Spades": 1, "Diamonds": 2, "Hearts": 3, "Clubs": 4}
@@ -24,22 +36,22 @@ class Card:
 
     @property
     def suit(self):
-        """ get suit """
+        """ return suit """
         return self._suit
 
     @property
     def suit_points(self):
-        """ get suit points """
+        """ return suit points """
         return self._suit_points
 
     @property
     def value(self):
-        """ get value """
+        """ return value """
         return self._value
 
     @property
     def value_points(self):
-        """ get value points """
+        """ return value points """
         return self._value_points
 
     def __str__(self):

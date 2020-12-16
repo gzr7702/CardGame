@@ -1,11 +1,22 @@
-""" Deck module """
+""" This is the Deck module. It holds the Deck class.
+
+Usage:
+    deck = Deck()
+"""
 
 import random
 from card import Card
 
 
 class Deck:
-    """ The deck class """
+    """The deck class
+
+    This class creates a standard deck with 52 cards including 4 suits and 13 values.
+
+    Attributes:
+        cards: The list of cards.
+        count: The number of cards in the deck.
+    """
 
     def __init__(self):
         self._count = 52
@@ -34,7 +45,10 @@ class Deck:
         random.shuffle(self._cards)
 
     def get_next_card(self):
-        """ Get the next card off the top of the deck """
+        """Get the next card off the top of the deck.
+
+        Decrements the count by one.
+        """
 
         if self._count != 0:
             self._count -= 1
