@@ -4,6 +4,7 @@ import random
 
 from hand import Hand
 
+
 class Player:
     """ Player object """
 

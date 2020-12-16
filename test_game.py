@@ -139,30 +139,83 @@ class TestGameObjects(unittest.TestCase):
 class TestGame(unittest.TestCase):
     """Test the aspects of the game """
 
-    '''
+    def setUp(self):
+        """ Set up mock players for game. """
+        self.player1 = Player("Ezra")
+        self.player2 = Player("Taylor")
+
+        cards = [
+            Card("Hearts", "3"),
+            Card("Diamonds", "5"),
+            Card("Hearts", "10"),
+            Card("Spades", "Ace"),
+            Card("Diamonds", "Jack"),
+            Card("Clubs", "Queen"),
+        ]
+
+        for c1 in cards[:3]:
+            self.player1.hand.add_card(c1)
+
+        for c2 in cards[3:]:
+            self.player2.hand.add_card(c2)
+    
+    @patch("builtins.input", side_effect=["Brooklyn", "Chris"])
+    def test_game_setup_creates_users(self, input):
+        """ Test that the setup function can create a users. """
+
+        (player1, player2) = game.set_up()
+        self.assertIsInstance(player1, Player)
+        self.assertIsInstance(player2, Player)
+
     @patch("sys.stdout", new_callable=StringIO)
-    def test_game_text(self, mock_stdout):
-        """ Test that the game text is correct. """
-        intro = (
-            "Welecome! Hit any key for the next "
-            + "player to take a turn, 'q' to quit.\n"
+    def test_current_score_function(self, mock_stdout):
+        """ Test that the current score function. """
+
+        score_message = (
+            "\tCurrent score for each player is:\n\t"
+            + self.player1.name
+            + ":"
+            + str(self.player1.hand.points)
+            + "\n\t"
+            + self.player2.name
+            + ":"
+            + str(self.player2.hand.points)
+            + "\n\n"
         )
-        instructions = 6 * "Hit any key to continue\n"
-        text = intro + instructions
-        # TODO: figure out all inputs
-        game.main()
-        self.assertEqual(mock_stdout.getvalue(), text)
 
-    @patch("builtins.input", return_value="q")
-    def test_player_input(self, input):
-        """ Test that the player input works. """
-        command = game.get_command()
-        self.assertEqual(command, "q")
+        game.print_current_score(self.player1, self.player2)
+        self.assertEqual(mock_stdout.getvalue(), score_message)
 
-    def test_game(self):
-        with patch('builtins.input', return_value="p"):
-            assert yes_or_no() == "score"
-    '''
+    @patch("sys.stdout", new_callable=StringIO)
+    def test_end_game_function(self, mock_stdout):
+        game.end_game(self.player1, self.player2)
+
+        function_text = (
+        "\tThe final score is:\n\t"
+        + self.player1.name
+        + ":"
+        + str(self.player1.hand.points)
+        + "\n\t"
+        + self.player2.name
+        + ":"
+        + str(self.player2.hand.points)
+        + "\n\n"
+        + "The winner is "
+        + self.player2.name
+        + " With "
+        + str(self.player2.hand.points)
+        + " points!\n\n"
+        )
+
+        self.assertEqual(mock_stdout.getvalue(), function_text)
+
+    @patch("builtins.input", side_effect=["name1", "name2", "q"])
+    def test_player_can_quit(self, input):
+        """ Test that the player can quit and the app exits gracefully. """
+        with self.assertRaises(SystemExit) as se:
+            game.main()
+        self.assertEqual(se.exception.code, 0)
+
 
 if __name__ == "__main__":
     unittest.main()

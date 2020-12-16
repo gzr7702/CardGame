@@ -50,6 +50,11 @@ def print_current_score(player1, player2):
 
     print(score_message)
 
+def game_score(player1, player2):
+    if player1.hand.points > player2.hand.points:
+        return player1
+    else:
+        return player2
 
 def end_game(player1, player2):
     """ Complete the game by calculating the final score and printing the winner info. """
@@ -68,13 +73,14 @@ def end_game(player1, player2):
 
     print(final_score_message)
 
-    if player1.hand.points > player2.hand.points:
-        winner = player1
-    else:
-        winner = player2
+    winner = game_score(player1, player2)
 
     winner_message = (
-        "The winner is " + winner.name + " With " + str(winner.hand.points) + " points!\n"
+        "The winner is "
+        + winner.name
+        + " With "
+        + str(winner.hand.points)
+        + " points!\n"
     )
 
     print(winner_message)
@@ -117,8 +123,13 @@ def main():
 
         next_card = deck.get_next_card()
         next_card_message = (
-            active_player.name + " drew the " + str(next_card) + "! "
-            + "That's worth " + str(next_card.suit_points * next_card.value_points) + "!\n"
+            active_player.name
+            + " drew the "
+            + str(next_card)
+            + "! "
+            + "That's worth "
+            + str(next_card.suit_points * next_card.value_points)
+            + "!\n"
         )
         print(next_card_message)
 
