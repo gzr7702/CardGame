@@ -9,3 +9,5 @@ spec.pdf
 __pycache__
 
 *.pyc
+
+/.vscode
