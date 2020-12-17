@@ -2,20 +2,22 @@
 
 The game is played between two people taking turns at the same terminal.
 
-Typical usage example:
+Typical usage:
 
-python game.py
-
+    python game.py
 """
 
 import sys
 from player import Player
 from deck import Deck
 
-# TODO: finish comments
 
 def set_up():
-    """ Set up the game with two players and print instructions. """
+    """Set up the game with two players and print instructions.
+
+    Returns:
+        Two player objects.
+    """
 
     name1 = input("Player 1, please enter your name:").strip()
     player1 = Player(name1)
@@ -35,7 +37,11 @@ def set_up():
 
 
 def print_current_score(player1, player2):
-    """ Gets the current score for both users and prints them to the screen. """
+    """Gets the current score for both users and prints them to the screen.
+
+    Args:
+        player1, player2: Two player objects
+    """
 
     score_message = (
         "\tCurrent score for each player is:\n\t"
@@ -53,9 +59,14 @@ def print_current_score(player1, player2):
 
 
 def calculate_winner(player1, player2):
-    """ Returns the user the winner based on points.
+    """Returns the user the winner based on points.
 
     If there is a tie, return None.
+    Args:
+        player1, player2: Two player objects
+
+    Returns:
+        The winning player, or None if there is a tie.
     """
 
     if player1.hand.points > player2.hand.points:
@@ -68,7 +79,12 @@ def calculate_winner(player1, player2):
 
 
 def player_takes_turn(active_player, deck):
-    """ Player gets a card from the deck and their score is displayed """
+    """Player gets a card from the deck and their score is displayed.
+
+    Args:
+        active_player: A player object
+        deck: The deck used for play.
+    """
 
     next_card = deck.get_next_card()
     next_card_message = (
@@ -87,7 +103,11 @@ def player_takes_turn(active_player, deck):
 
 
 def end_game(player1, player2):
-    """ Complete the game by calculating the final score and printing the winner info. """
+    """Complete the game by calculating the final score and printing the winner information.
+
+    Args:
+        player1, player2: Two player objects
+    """
 
     final_score_message = (
         "\tThe final score is:\n\t"
@@ -114,11 +134,7 @@ def end_game(player1, player2):
             + " points!\n"
         )
     else:
-        winner_message = (
-            "We have a tie with "
-            + str(player1.hand.points)
-            + "!"
-        )
+        winner_message = "We have a tie with " + str(player1.hand.points) + "!"
 
     print(winner_message)
 
@@ -126,10 +142,7 @@ def end_game(player1, player2):
 def main():
     """Starts the card game.
 
-    Args: None
-
-    Returns: None
-
+    Holds the main game loop.
     """
 
     deck = Deck()

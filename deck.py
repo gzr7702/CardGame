@@ -48,6 +48,9 @@ class Deck:
         """Get the next card off the top of the deck.
 
         Decrements the count by one.
+
+        Raises:
+            IndexError
         """
 
         if self._count != 0:
