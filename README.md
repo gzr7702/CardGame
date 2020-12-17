@@ -1,6 +1,6 @@
 # CardGame
 
-This is a card game written in Python. The rules are very simple: There are 2 users. Each user takes turns pulling a card from the deck by hitting any key on the keyboard. After 3 turns each, the winner is determined by the sum of each suit point number x card number.
+This is a card game written in Python. The rules are very simple: There are 2 users. Each user takes turns pulling a card from the deck by pressing any key on the keyboard. After 3 turns each, the winner is determined by the sum of the suit point number x the card value.
 
 The suits are scored as follows:
 
@@ -9,7 +9,19 @@ The suits are scored as follows:
 - Diamonds = 2
 - Spades = 1
 
-The values of the cards equal the numbers 2-10, 1 for Aces, and 11-13 for Jacks, Kings, and Queens.
+The values of the cards equal either their numbers (2-10) or for face cards, the following values:
+
+- Ace = 1
+- Jack = 11
+- King = 12
+- Queen =13
+
+For example, the King of Hearts would be calclulated as:
+
+```
+King: 12, Hearts: 3
+12 * 3 = 36
+```
 
 ## Installation
 
